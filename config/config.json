@@ -1,0 +1,10 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "postgres",
+    "database": "marketplace",
+    "host": "127.0.0.1",
+    "port":"6969",
+    "dialect": "postgres"
+  }
+}
