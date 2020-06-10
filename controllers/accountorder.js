@@ -28,5 +28,21 @@ module.exports = class {
         res.status(500).json(err);
       });
   }
-  
-}
+  static delete(req, res) {
+    AccountOrder.destroy({
+      where: {
+        id: req.params.accountOrderID,
+      },
+    })
+      .then((result) => {
+        if (result) {
+          res.status(200).json(result);
+        } else {
+          res.status(404).json(result);
+        }
+      })
+      .catch((err) => {
+        res.status(500).json(err);
+      });
+  }
+};
