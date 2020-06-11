@@ -1,4 +1,5 @@
 const { Account } = require("../models");
+
 module.exports = class {
   static getData(req, res) {
     Account.findByPk(req.params.accountID)
@@ -37,7 +38,7 @@ module.exports = class {
   static delete(req, res) {
     Account.destroy({
       where: {
-        id:req.params.accountID,
+        id: req.params.accountID,
       },
     })
       .then((result) => {
