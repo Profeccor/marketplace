@@ -1,4 +1,5 @@
 "use strict";
+const bcrypt = require('bcrypt')
 module.exports = (sequelize, DataTypes) => {
   class Account extends sequelize.Sequelize.Model {}
   Account.init(

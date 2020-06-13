@@ -1,5 +1,8 @@
 const { Account } = require("../models");
 
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
+
 module.exports = class {
   static getData(req, res) {
     Account.findByPk(req.params.accountID)
@@ -52,4 +55,5 @@ module.exports = class {
         res.status(500).json(err);
       });
   }
+  
 };
