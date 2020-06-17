@@ -9,14 +9,13 @@ module.exports = function (req, res, next) {
 	try {
 		const decoded = jwt.verify(token, secretKeys)
 		const { id } = decoded
-
-		Account.findAll({
+		Account.findOne({
 			where: {
 				id: id,
 			},
 		})
 			.then((result) => {
-				if (result.length >= 1) {
+				if (result) {
 					req.currentUser = id
 					next()
 				} else {
@@ -26,7 +25,7 @@ module.exports = function (req, res, next) {
 			.catch((err) => {
 				res.status(505).json(err)
 			})
-	} catch (err) {
-		res.status(505).json("Harap login terlebih dahulu")
+		} catch (err) {
+		res.status(505).json({msg:"Harap Login Terlebih Dahulu"})
 	}
 }

@@ -1,20 +1,21 @@
-const { Product } = require('../models')
+const { Product, Toko } = require('../models')
 module.exports = function (req, res, next) {
 	// cek kalo req.currentUser = user id yang diakses lewat parameter
 	Product.findByPk(req.params.productID)
-		.then((result) => {
-			if (result) {
-				//cek kepemilikan
-				if (result.tokoID == req.currentToko) {
-					next()
-				} else {
-					res.status(404).json("Anda tidak memiliki hak akses")
-				}
-			} else {
-                res.status(404).json({msg:"data not found"})
-			}
-		})
-		.catch((err) => {
-            res.status(500).json(err)
-		})
+	.then((result)=>{
+		return Toko.findByPk(result.tokoID)
+	})
+	.then((hasilToko)=>{
+		if(hasilToko.accountID==req.currentUser){
+			req.currentToko = hasilToko.id
+			next()
+		}
+		else{
+			res.status(403).json({msg:"anda tidak memiliki hak akses"})
+		}
+	})
+	.catch((err)=>{
+		res.status(500).json(err)
+	})	
+	
 }

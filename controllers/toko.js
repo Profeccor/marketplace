@@ -1,7 +1,11 @@
-const { Toko } = require("../models");
+const { Toko,Product } = require("../models");
 module.exports = class {
   static getData(req, res) {
-    Toko.findByPk(req.params.tokoID)
+    Toko.findByPk(req.params.tokoID,
+      {
+        include:[Product]
+    }
+    )
       .then((result) => {
         if (result) {
           res.status(200).json(result);
@@ -21,7 +25,7 @@ module.exports = class {
       deskripsi: req.body.deskripsi,
       gambar: req.body.gambar,
       //account ID  dibawah belum diganti dengan request currentUser
-      accountID: req.body.accountID,
+      accountID: req.currentUser,
     })
       .then((result) => {
         if (result) {

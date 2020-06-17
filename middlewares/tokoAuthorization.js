@@ -6,7 +6,6 @@ module.exports = function (req, res, next) {
 			if (result) {
 				//cek kepemilikan
 				if (result.Accountid == req.currentUser) {
-					req.currentToko = result.id
 					next()
 				} else {
 					res.status(404).json("Anda tidak memiliki hak akses")

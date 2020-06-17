@@ -6,6 +6,6 @@ const authorization = require(`../middlewares/tokoAuthorization`)
 
 router.get('/:tokoID', TokoController.getData)
 router.delete('/:tokoID',authentication , authorization, TokoController.delete)
-router.post('/createToko', TokoController.createToko)
+router.post('/createToko',authentication, TokoController.createToko)
 
 module.exports = router

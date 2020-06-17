@@ -11,6 +11,9 @@ module.exports = (sequelize, DataTypes) => {
   }, {sequelize});
   Toko.associate = function(models) {
     // associations can be defined here
+    Toko.hasMany(models.Product,{
+			foreignKey: 'tokoID',
+		})
   };
   return Toko;
 };
