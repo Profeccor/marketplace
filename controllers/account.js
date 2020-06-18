@@ -1,11 +1,13 @@
-const { Account } = require("../models");
+const { Account,Toko } = require("../models");
 
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
 module.exports = class {
   static getData(req, res) {
-    Account.findByPk(req.params.accountID)
+    Account.findByPk(req.params.accountID,{
+      include:[Toko]
+  })
       .then((result) => {
         if (result) {
           res.status(200).json(result);

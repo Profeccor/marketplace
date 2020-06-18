@@ -8,6 +8,10 @@ module.exports = (sequelize, DataTypes) => {
   }, {sequelize});
   Order.associate = function(models) {
     // associations can be defined here
+    Order.belongsToMany(models.Account, {
+      through: "AccountOrder",
+      foreignKey: "orderID",
+    });
   };
   return Order;
 };
