@@ -41,7 +41,7 @@ module.exports = class {
               id: result.id,
             };
             const generatedToken = jwt.sign(payload, secretKey, {
-              expiresIn: "12h",
+              // expiresIn: "12h",
             });
             res.status(200).json({ accessToken: generatedToken });
           } else {
