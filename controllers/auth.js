@@ -45,14 +45,15 @@ module.exports = class {
             });
             res.status(200).json({ accessToken: generatedToken });
           } else {
-            next({ code: 401 });
+            res.status(401).json({msg:"Password yang anda masukkan salah"});
           }
         } else {
-          next({ code: 401 });
+          res.status(401).json({msg:"Akun/ password anda salah"});
         }
       })
       .catch((err) => {
-        next({ code: 500, msg: err });
+        console.log(err)
+        res.status(500).json({msg:err});
       });
   }
 };

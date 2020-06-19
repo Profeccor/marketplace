@@ -5,6 +5,7 @@ const bcrypt = require("bcrypt");
 
 module.exports = class {
   static getData(req, res) {
+    console.log("masuk sini")
     Account.findByPk(req.params.accountID,{
       include:[Toko]
   })

@@ -15,5 +15,5 @@ app.use(express.json())
 app.use('/', router)
 
 app.listen(PORT, (_) => {
-	console.log('ok')
+	console.log("ada di port => ",PORT)
 })
