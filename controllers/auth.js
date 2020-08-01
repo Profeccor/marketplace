@@ -5,14 +5,16 @@ const bcrypt = require("bcrypt");
 
 module.exports = class {
   static verify(req, res, next) {
+    console.log("masuksini")
     try {
       const accesstoken = req.headers.accesstoken;
       const secretKey = process.env.SECRETKEYS;
       const jwtdecoded = jwt.verify(accesstoken, secretKey);
       Account.findByPk(jwtdecoded.id)
         .then((result) => {
+          
           if (result) {
-            res.status(200).json({ status: "ok" });
+            res.status(200).json({ status: "ok",id:result.id});
           } else {
             res.status(404).json({ status: "gagal" });
           }

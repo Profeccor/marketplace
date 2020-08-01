@@ -13,18 +13,22 @@ module.exports = class {
         res.status(500).json(err);
       });
   }
-  static addProduct(req, res) {
+  static addProduct(req, res,next) {
+  //  console.log(req.body)
+  console.log(req.file)
     Product.create({
       nama: req.body.nama,
       kategori: req.body.kategori,
       deskripsi: req.body.deskripsi,
-      gambar: req.body.gambar,
-      //toko ID  dibawah belum diganti dengan request tokoID yang menambah
+      gambar: req.file.filename,
+      
       tokoID: req.currentToko,
     })
       .then((result) => {
         if (result) {
-          res.status(200).json({msg:"data berhasil ditambahkan"});
+          req.currentproductid = result.id
+         next()
+          
         } else {
           res.status(404).json(result);
         }
